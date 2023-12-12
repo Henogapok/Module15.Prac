@@ -54,6 +54,16 @@ namespace Module15.Prac
             var meth1 = myType.GetMethod("PublicMethod");
             meth1.Invoke(a, null);
 
+            Console.WriteLine("\nCalling private method via reflexia");
+            foreach(var meth in myType.GetMethods(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public))
+            {
+                //Console.Write(meth.Name == "PrivateMethod" ? meth.Invoke(a, null) : "");
+                //Одно из этих двух, и то, и то работает
+                if (!meth.IsPublic && meth.Name == "PrivateMethod")
+                    Console.WriteLine(meth.Invoke(a, null));
+            }
+            Console.WriteLine("\n");
+
 
         }
         class MyClass
